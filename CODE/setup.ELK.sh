@@ -1,6 +1,7 @@
 #! /bin/bash
 
 source /root/ELK-main/CODE/setup.conf.sh
+
 echo "Kiểm tra máy chủ"
 if systemctl is-active --quiet elasticsearch; then
     echo "elasticsearch Đã được cài đặt, Không đạt yêu cầu..."

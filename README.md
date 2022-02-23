@@ -54,8 +54,8 @@ vi /etc/nginx/nginx.conf
  
 -->
 
-# TÀI LIỆU HƯỚNG DẪN CÀI ĐĂT 1 MÔ HÌNH HỆ THỐNG ELK (Elasticsearch logstash kibana)
-## Người viết : Phạm Đức Tài
+# TÀI LIỆU HƯỚNG DẪN CÀI ĐĂT MỘT  MÔ HÌNH HỆ THỐNG ELK (Elasticsearch logstash kibana)
+## Người viết : Phạm Đức Tài, Phùng Công Việt Anh
 ## SDT : 0837686717
 ## Mail : phamductai123456@gmail.com
 
@@ -74,8 +74,8 @@ vi /etc/nginx/nginx.conf
     * Kibana - ứng dụng nền web để tìm kiếm và xem trực quan các logs
     * Beats - gửi dữ liệu thu thập từ log của máy đến Logstash
 * Chuẩn bị 2 máy 1 máy chứa 
-  * Elasticsearch, Logstash, Kibana với ip là 192.168.1.11 
-  * 1 máy chứa Beats với ip là 192.168.1.12
+  * Elasticsearch, Logstash, Kibana với IP là 192.168.1.11 (tối thiểu 2gb RAM để mô hình chạy ổn định)
+  * 1 máy chứa Beats với IP là 192.168.1.12
 
 ## 2.	Tiến hành cài đặt
 * Việc đầu tiên ở tất cả các máy chúng ta sẽ tiến hành tắt SELINUX, tải các gói wget, unzip (tải kho code về máy) và reboot lại hệ thống
@@ -106,15 +106,15 @@ vi setup.conf.sh
 
 #! /bin/bash
 
-ip_ELK="192.168.1.11"
-ip_user="192.168.1.2"
-ip_filebeat="192.168.1.12"
+ip_ELK="192.168.1.11" (IP máy cài đặt ELK)
+ip_user="192.168.1.2" (IP máy thật người dùng)
+ip_filebeat="192.168.1.12" (IP máy cài đặt filebeat)
 
 ```
 * ### ***Lưu ý:*** file config trên ở tất cả các máy sẽ phải giống nhau nếu không sẽ dẫn đến việc cài đặt sai
 * Sau khi đã thiết lập xong các thông số thì sẽ đến bước tiếp theo
 
-## ***Sau đó ta sẽ tiến hành cài đặt bắt đầu từ có IP 192.168.1.11 đầu tiên***
+## ***Sau đó ta sẽ tiến hành cài đặt bắt đầu từ máy có IP 192.168.1.11 đầu tiên***
 # Sau đó ta tiến hành cài đặt
 ```php
 #Truy cập vào thư mục sau

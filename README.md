@@ -90,13 +90,13 @@ reboot
 ```php
 #Để tải kho code về, ta dùng wget và làm như sau:
 
-wget https://github.com/ductai124/ELK/main.zip
+https://github.com/ductai124/ELK/archive/refs/heads/main.zip
 
 unzip  main.zip
 
 #Sau đó chúng ta tiếp tục cd vào thư mục như sau:
 
-cd /ELK/CODE 
+cd /root/ELK-main/CODE
 
 #Hãy truy cập vào file config có tên là setup.conf.sh và điền đúng ip dải ip theo máy của mình
 #Như mô hình trên thì file config sẽ được cấu hình như sau
@@ -118,7 +118,7 @@ ip_filebeat="192.168.1.12"
 # Sau đó ta tiến hành cài đặt
 ```php
 #Truy cập vào thư mục sau
-cd ELK/CODE/ 
+cd /root/ELK-main/CODE
 
 #Trước khi cài đặt hãy chắc chắn rằng file setup.conf.sh của các máy được thiết lập các thông số giống nhau
 
@@ -132,7 +132,7 @@ bash setup.ELK.sh
 ## ***Tiếp theo sẽ tiến hành cài đặt máy có IP 192.168.1.12*** (đảm bảo rằng máy đã cài đặt mariadb từ trước)
 ```php
 #Truy cập vào thư mục sau
-cd ELK/CODE/ 
+cd /root/ELK-main/CODE
 
 #Trước khi cài đặt hãy chắc chắn r file setup.conf.sh của các máy được thiết lập các thông số giống nhau
 

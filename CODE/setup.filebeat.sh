@@ -40,7 +40,6 @@ sed -i 's/paths:/&\n    - \/var\/log\/*\/*\.log/' /etc/filebeat/filebeat.yml
 echo "Mở kiabana để setup dashboards"
 sed -i "s/#host: \"localhost:5601\"/host: \"$ip_ELK:5601\"/g" /etc/filebeat/filebeat.yml
 
-
 echo "Khởi động các modules"
 filebeat modules enable system
 filebeat modules enable apache

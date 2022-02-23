@@ -90,7 +90,7 @@ reboot
 ```php
 #Để tải kho code về, ta dùng wget và làm như sau:
 
-https://github.com/ductai124/ELK/archive/refs/heads/main.zip
+wget https://github.com/ductai124/ELK/archive/refs/heads/main.zip
 
 unzip  main.zip
 

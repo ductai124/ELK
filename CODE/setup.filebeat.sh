@@ -37,7 +37,7 @@ sed -i "s/#hosts: \[\"localhost:5044\"\]/hosts: \[\"$ip_ELK:5044\"\]/g" /etc/fil
 
 
 echo "Thêm đường dẫn để lấy được đầy đủ log"
-
+sed -i 's/ enabled: false/ enabled: true/g' /etc/filebeat/filebeat.yml
 sed -i 's/paths:/&\n    - \/var\/log\/*\/*\.log/' /etc/filebeat/filebeat.yml
 
 

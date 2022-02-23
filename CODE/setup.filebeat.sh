@@ -18,6 +18,10 @@ enabled=1
 autorefresh=1
 type=rpm-md
 ' > /etc/yum.repos.d/elasticsearch.repo
+
+echo "Update và cài đặt java"
+yum update -y
+yum install java-1.8.0-openjdk-devel -y
 echo "Cài đặt filebeat"
 yum install filebeat -y
 echo "Cấu hình filebeat"

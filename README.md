@@ -61,9 +61,9 @@ vi /etc/nginx/nginx.conf
 
 ***
 # Mục lục
-[1. Giới thiệu mô hình] (https://github.com/ductai124/ELK#1gi%E1%BB%9Bi-thi%E1%BB%87u-m%C3%B4-h%C3%ACnh)
+[1. Giới thiệu mô hình](https://github.com/ductai124/ELK#1gi%E1%BB%9Bi-thi%E1%BB%87u-m%C3%B4-h%C3%ACnh)
 
-[2. Tiến hành cài đặt] (https://github.com/ductai124/ELK#2ti%E1%BA%BFn-h%C3%A0nh-c%C3%A0i-%C4%91%E1%BA%B7t)
+[2. Tiến hành cài đặt](https://github.com/ductai124/ELK#2ti%E1%BA%BFn-h%C3%A0nh-c%C3%A0i-%C4%91%E1%BA%B7t)
 
 
 ***

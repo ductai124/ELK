@@ -1,4 +1,6 @@
-source /root/ELK/CODE/setup.conf.sh
+#! /bin/bash
+
+source /root/ELK-main/CODE/setup.conf.sh
 
 if systemctl is-active --quiet filebeat; then
     echo "filebeat Đã được cài đặt, Không đạt yêu cầu..."
@@ -71,3 +73,7 @@ log_queries_not_using_indexes=ON
 #systemctl restart mariadb
 #systemctl restart mysql
 #systemctl restart mysqld
+
+
+
+exit 0

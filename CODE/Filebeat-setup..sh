@@ -23,7 +23,7 @@ echo "Cấu hình filebeat"
 echo "chỉnh sửa gửi dữ liệu đến logstash thay vì elasticsearch"
 echo "Tắt gửi trực tiêp đến elasticsearch"
 sed -i 's/output.elasticsearch:/#output.elasticsearch:/g' /etc/filebeat/filebeat.yml
-sed -i 's/hosts: ["localhost:9200"]/#hosts: ["localhost:9200"]/g' /etc/filebeat/filebeat.yml
+sed -i 's/hosts: \[\"localhost:9200\"\]/#hosts: \[\"localhost:9200\"\]/g' /etc/filebeat/filebeat.yml
 
 echo "Chỉnh sửa gửi dữ liệu đến logstash thay vì elasticsearch"
 sed -i 's/#output.logstash:/output.logstash:/g' /etc/filebeat/filebeat.yml
@@ -36,7 +36,8 @@ sed -i 's/paths:/&\n    - \/var\/log\/*\/*\.log/' /etc/filebeat/filebeat.yml
 
 
 echo "Mở kiabana để setup dashboards"
-sed -i "s/#host: "localhost:5601"/host: "$ip_ELK:5601"/g" /etc/filebeat/filebeat.yml
+sed -i "s/#host: \"localhost:5601\"/host: \"$ip_ELK:5601\"/g" /etc/filebeat/filebeat.yml
+
 
 echo "Khởi động các modules"
 filebeat modules enable system

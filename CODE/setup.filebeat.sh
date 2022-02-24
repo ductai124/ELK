@@ -1,6 +1,6 @@
 #! /bin/bash
 
-source /root/ELK-main/CODE/setup.conf.sh
+source ./setup.conf.sh
 
 if systemctl is-active --quiet filebeat; then
     echo "filebeat Đã được cài đặt, Không đạt yêu cầu..."

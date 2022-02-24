@@ -73,9 +73,10 @@ vi /etc/nginx/nginx.conf
     * Logstash - thành phần xử lý dữ liệu, sau đó nó gửi dữ liệu nhận được cho Elasticsearch để lưu trữ
     * Kibana - ứng dụng nền web để tìm kiếm và xem trực quan các logs
     * Beats - gửi dữ liệu thu thập từ log của máy đến Logstash
-* Chuẩn bị 2 máy 1 máy chứa 
+* Chuẩn bị 2 máy 1 máy chứa:
   * Elasticsearch, Logstash, Kibana với IP là 192.168.1.11 (tối thiểu 2gb RAM để mô hình chạy ổn định)
-  * 1 máy chứa Beats với IP là 192.168.1.12
+  * 1 máy chứa Beats với IP là 192.168.1.12 (chuẩn bị máy đã được cài đặt nginx, mariadb)
+* Việc kiểm soát log là vô cùng quan trọng và để việc đó trở nên dễ dàng hơn thì mô hình ELK là giải pháp cho việc kiểm soát log nhanh chóng và dễ dàng
 
 ## 2.	Tiến hành cài đặt
 * Việc đầu tiên ở tất cả các máy chúng ta sẽ tiến hành tắt SELINUX, tải các gói wget, unzip (tải kho code về máy) và reboot lại hệ thống
@@ -115,7 +116,7 @@ ip_filebeat="192.168.1.12" (IP máy cài đặt filebeat)
 * Sau khi đã thiết lập xong các thông số thì sẽ đến bước tiếp theo
 
 ## ***Sau đó ta sẽ tiến hành cài đặt bắt đầu từ máy có IP 192.168.1.11 đầu tiên***
-# Sau đó ta tiến hành cài đặt
+# Ta tiến hành cài đặt như sau:
 ```php
 #Truy cập vào thư mục sau
 cd /root/ELK-main/CODE
@@ -129,7 +130,7 @@ chmod 777 setup*
 bash setup.ELK.sh
 ```
 
-## ***Tiếp theo sẽ tiến hành cài đặt máy có IP 192.168.1.12*** (đảm bảo rằng máy đã cài đặt mariadb từ trước)
+## ***Tiếp theo sẽ tiến hành cài đặt máy có IP 192.168.1.12*** 
 ```php
 #Truy cập vào thư mục sau
 cd /root/ELK-main/CODE
@@ -143,3 +144,20 @@ chmod 777 setup*
 bash setup.filebeat.sh
 ```
 
+## ***Cách kiểm tra log mariadb*** 
+```php
+#Đầu tiên hãy đăng nhập vào mariadb, sau đó chạy các lệnh sau:
+
+show variables like '%SLOW%';
+SHOW GLOBAL VARIABLES LIKE 'slow\_%';
+SELECT SLEEP(3);
+SELECT SLEEP(4);
+
+#Thoát mariadb, sau đó kiểm tra log như sau:
+
+systemctl restart mariadb
+systemctl restart mysql 
+systemctl restart mysqld
+
+vi /var/log/mariadb-slow.log
+```

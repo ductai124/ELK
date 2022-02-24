@@ -90,7 +90,7 @@ reboot
 ## ***Tải kho code và cấu hình trước khi tiến hành thiết lập các thông số trên toàn bộ các máy***
 ```php
 #Để tải kho code về, ta dùng wget và làm như sau:
-
+cd /root
 wget https://github.com/ductai124/ELK/archive/refs/heads/main.zip
 
 unzip  main.zip
@@ -101,6 +101,7 @@ cd /root/ELK-main/CODE
 
 #Hãy truy cập vào file config có tên là setup.conf.sh và điền đúng ip dải ip theo máy của mình
 #Như mô hình trên thì file config sẽ được cấu hình như sau
+
 #Hãy sửa file setup.conf.sh theo như các máy của mình
 #LƯU Ý: File config này sẽ được dùng cho tất cả các máy
 vi setup.conf.sh

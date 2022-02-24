@@ -155,9 +155,5 @@ SELECT SLEEP(4);
 
 #Thoát mariadb, sau đó kiểm tra log như sau:
 
-systemctl restart mariadb
-systemctl restart mysql 
-systemctl restart mysqld
-
 vi /var/log/mariadb-slow.log
 ```

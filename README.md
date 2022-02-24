@@ -115,9 +115,10 @@ ip_filebeat="192.168.1.12" (IP máy cài đặt filebeat)
 * ### ***Lưu ý:*** file config trên ở tất cả các máy sẽ phải giống nhau nếu không sẽ dẫn đến việc cài đặt sai
 * Sau khi đã thiết lập xong các thông số thì sẽ đến bước tiếp theo
 
-## ***Sau đó ta sẽ tiến hành cài đặt bắt đầu từ máy có IP 192.168.1.11 đầu tiên***
+## ***Sau đó ta sẽ tiến hành cài đặt bắt đầu từ máy Elastic Stack (có IP 192.168.1.11) đầu tiên***
 # Ta tiến hành cài đặt như sau:
-```php
+
+```bash
 #Truy cập vào thư mục sau
 cd /root/ELK-main/CODE
 
@@ -130,8 +131,10 @@ chmod 777 setup*
 bash setup.ELK.sh
 ```
 
-## ***Tiếp theo sẽ tiến hành cài đặt máy có IP 192.168.1.12*** 
-```php
+## ***Tiếp theo sẽ tiến hành cài đặt máy Beats trên các webserrer có IP 192.168.1.12*** 
+(Nếu có nhiều webserver chúng ta sẽ phải lặp lại quá trình này cho các máy đó)
+
+```bash
 #Truy cập vào thư mục sau
 cd /root/ELK-main/CODE
 
@@ -145,7 +148,7 @@ bash setup.filebeat.sh
 ```
 
 ## ***Cách kiểm tra log mariadb*** 
-```php
+```bash
 #Đầu tiên hãy đăng nhập vào mariadb, sau đó chạy các lệnh sau:
 
 show variables like '%SLOW%';

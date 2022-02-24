@@ -46,7 +46,7 @@ sed -i "s/#host: \"localhost:5601\"/host: \"$ip_ELK:5601\"/g" /etc/filebeat/file
 
 echo "Khởi động các modules"
 filebeat modules enable system
-filebeat modules enable apache
+filebeat modules enable nginx
 filebeat modules enable mysql
 echo "Khởi động filebeat"
 
@@ -58,10 +58,28 @@ filebeat setup --dashboards
 
 
 echo "Thiết lập mysql slow log"
+echo "Kiểm tra mariadb đã được cài đặt chưa"
+if systemctl is-active --quiet mariadb; then
+    echo "Mariadb Đã được cài đặt"
+else
+    echo "Máy chưa cài đặt mariadb vậy nên sẽ chưa thể thiết lập slow log được cho DB vui lòng cài đặt mariadb"
+    exit
+fi
+if systemctl is-active --quiet mysql; then
+    echo "Mysql Đã được cài đặt"
+else
+    echo"Máy chưa cài đặt mariadb vậy nên sẽ chưa thể thiết lập slow log được cho DB vui lòng cài đặt mariadb"
+    exit
+fi
+
+echo "Máy chủ đạt yêu cầu để thiết lập slow log cho mariadb"
 echo "Tạo file lưu trữ slow log và phân quyền"
 
 touch /var/log/mariadb-slow.log
 chown mysql:mysql /var/log/mariadb-slow.log
+
+
+
 
 echo "Config mariadb"
 echo '
@@ -74,9 +92,9 @@ long_query_time=1.0
 log_queries_not_using_indexes=ON
 ' > /etc/my.cnf
 
-#systemctl restart mariadb
-#systemctl restart mysql
-#systemctl restart mysqld
+systemctl restart mariadb
+systemctl restart mysql
+systemctl restart mysqld
 
 
 

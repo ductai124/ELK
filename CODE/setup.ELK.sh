@@ -108,6 +108,11 @@ echo 'filter {
 echo "Kiểm tra"
 sudo -u logstash /usr/share/logstash/bin/logstash --path.settings /etc/logstash -t
 echo "Cấu hình tường lửa"
+
+dnf install firewalld -y
+systemctl enable firewalld.service
+systemctl start firewalld.service
+
 echo "Tạo zone dịch vụ"
 firewall-cmd --permanent --new-zone=dichvu
 echo "Mở cổng cho dịch vụ elasticsearch"
@@ -129,7 +134,5 @@ systemctl enable kibana
 systemctl start kibana
 systemctl enable elasticsearch.service
 systemctl start elasticsearch.service
-
-
 
 exit 0

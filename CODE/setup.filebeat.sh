@@ -79,19 +79,6 @@ touch /var/log/mariadb-slow.log
 chown mysql:mysql /var/log/mariadb-slow.log
 
 
-
-
-echo "Config mariadb"
-echo '
-[mariadb]
-slow_query_log
-slow_query_log_file=mariadb-slow.log
-slow_query_log_file=/var/log/mariadb-slow.log
-log_output=FILE
-long_query_time=1.0
-log_queries_not_using_indexes=ON
-' > /etc/my.cnf
-
 systemctl restart mariadb
 systemctl restart mysql
 systemctl restart mysqld

@@ -80,7 +80,7 @@ vi /etc/nginx/nginx.conf
 
 ## 2.	Tiến hành cài đặt
 * Việc đầu tiên ở tất cả các máy chúng ta sẽ tiến hành tắt SELINUX, tải các gói wget, unzip (tải kho code về máy) và reboot lại hệ thống
-```php
+```bash
 sed -i 's/\(^SELINUX=\).*/\SELINUX=disabled/' /etc/sysconfig/selinux
 sed -i 's/\(^SELINUX=\).*/\SELINUX=disabled/' /etc/selinux/config
 yum -y install wget unzip
@@ -88,20 +88,18 @@ yum -y install wget unzip
 reboot
 ```
 ## ***Tải kho code và cấu hình trước khi tiến hành thiết lập các thông số trên toàn bộ các máy***
-```php
+```bash
 #Để tải kho code về, ta dùng wget và làm như sau:
 cd /root
 wget https://github.com/ductai124/ELK/archive/refs/heads/main.zip
 
 unzip  main.zip
 
-#Sau đó chúng ta tiếp tục cd vào thư mục như sau:
+#Sau đó chúng ta tiếp tục cd vào thư mục theo đường dẫn như sau:
 
 cd /root/ELK-main/CODE
 
 #Hãy truy cập vào file config có tên là setup.conf.sh và điền đúng ip dải ip theo máy của mình
-#Như mô hình trên thì file config sẽ được cấu hình như sau
-
 #Hãy sửa file setup.conf.sh theo như các máy của mình
 #LƯU Ý: File config này sẽ được dùng cho tất cả các máy
 vi setup.conf.sh
@@ -120,7 +118,7 @@ ip_filebeat="192.168.1.12" (IP máy cài đặt filebeat)
 # Ta tiến hành cài đặt như sau:
 
 ```bash
-#Truy cập vào thư mục sau
+#Truy cập vào thư mục sau theo đường dẫn:
 cd /root/ELK-main/CODE
 
 #Trước khi cài đặt hãy chắc chắn rằng file setup.conf.sh của các máy được thiết lập các thông số giống nhau
@@ -130,24 +128,55 @@ chmod 777 setup*
 
 #Chạy tools cài đặt
 bash setup.ELK.sh
+
+#Kiểm tra đã hoàn tất cài đặt như sau:
+
+systemctl status elasticsearch
+systemctl status kibana
+systemctl status logstash
 ```
 
-## ***Tiếp theo sẽ tiến hành cài đặt máy Beats trên các webserrer có IP 192.168.1.12*** 
-(Nếu có nhiều webserver chúng ta sẽ phải lặp lại quá trình này cho các máy đó)
+## ***Tiếp theo sẽ tiến hành cài đặt máy Beats trên các webserrer có IP 192.168.1.12*** (nếu có nhiều webserver chúng ta sẽ phải lặp lại quá trình này cho các máy đó)
 
 ```bash
-#Truy cập vào thư mục sau
+#Truy cập vào thư mục sau theo đường dẫn:
 cd /root/ELK-main/CODE
 
-#Trước khi cài đặt hãy chắc chắn r file setup.conf.sh của các máy được thiết lập các thông số giống nhau
+#Trước khi cài đặt hãy chắc chắn rằng file setup.conf.sh của các máy được thiết lập các thông số giống nhau
 
 #Phân quyền 
 chmod 777 setup*
 
 #Chạy tools cài đặt
 bash setup.filebeat.sh
+
+##Kiểm tra đã hoàn tất cài đặt như sau:
+systemctl status filebeat
 ```
 
+## ***Xem log trong kibana*** 
+```bash
+#Đến đây bạn đã có một ELK (một trung tâm quản lý log), nó đang nhận log từ một server gửi đến bằng Filebeat (nếu muốn server khác gửi đến nữa thì cài Filebeat trên server nguồn và cấu hình như trên)
+
+#Truy cập vào Kibana theo địa chỉ IP của ELK, ví dụ http://192.168.1.11:5601, nhấn vào phần Discover, chọn mục Index Management của Elasticsearch, bạn sẽ thấy các index có tiền tố là filebeat-*, chính là các index lưu dữ liệu log do Filebeat gửi đến Logstash và Logstash để chuyển lưu tại Elasticsearch (nếu có nhiều server gửi đến thì có nhiều index dạng này)
+
+#Cuối cùng, bấm vào Discover để xem thông tin về các log. Mặc định đang liệt kê các log 15 phút cuối
+```
+## ***Config mariadb*** 
+```bash
+#Đăng nhập vào file conf của mariadb:
+vi /etc/my.cnf
+
+#Sau đó thêm các dòng lệnh như sau:
+[mariadb]
+slow_query_log
+slow_query_log_file=mariadb-slow.log
+slow_query_log_file=/var/log/mariadb-slow.log
+log_output=FILE
+long_query_time=1.0
+log_queries_not_using_indexes=ON
+
+```
 ## ***Cách kiểm tra log mariadb*** 
 ```bash
 #Đầu tiên hãy đăng nhập vào mariadb, sau đó chạy các lệnh sau:

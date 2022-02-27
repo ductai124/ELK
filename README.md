@@ -152,6 +152,14 @@ bash setup.filebeat.sh
 
 ##Kiểm tra đã hoàn tất cài đặt như sau:
 systemctl status filebeat
+
+#Ta thiết lập các module tùy theo nhu cầu sử dụng
+#Modules hệ thống
+filebeat modules enable system
+#Modules nginx
+filebeat modules enable nginx
+#Modules mysql
+filebeat modules enable mysql
 ```
 
 ## ***Xem log trong kibana*** 
@@ -162,7 +170,7 @@ systemctl status filebeat
 
 #Cuối cùng, bấm vào Discover để xem thông tin về các log. Mặc định đang liệt kê các log 15 phút cuối
 ```
-## ***Config mariadb*** 
+## ***Setup mariadb slow log*** 
 ```bash
 #Đăng nhập vào file conf của mariadb:
 vi /etc/my.cnf

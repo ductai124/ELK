@@ -44,10 +44,10 @@ sed -i 's/paths:/&\n    - \/var\/log\/*\/*\.log/' /etc/filebeat/filebeat.yml
 echo "Mở kiabana để setup dashboards"
 sed -i "s/#host: \"localhost:5601\"/host: \"$ip_ELK:5601\"/g" /etc/filebeat/filebeat.yml
 
-echo "Khởi động các modules"
-filebeat modules enable system
-filebeat modules enable nginx
-filebeat modules enable mysql
+#echo "Khởi động các modules"
+#filebeat modules enable system
+#filebeat modules enable nginx
+#filebeat modules enable mysql
 echo "Khởi động filebeat"
 
 systemctl enable filebeat
@@ -57,31 +57,7 @@ echo "setup dashboards"
 filebeat setup --dashboards
 
 
-echo "Thiết lập mysql slow log"
-echo "Kiểm tra mariadb đã được cài đặt chưa"
-if systemctl is-active --quiet mariadb; then
-    echo "Mariadb Đã được cài đặt"
-else
-    echo "Máy chưa cài đặt mariadb vậy nên sẽ chưa thể thiết lập slow log được cho DB vui lòng cài đặt mariadb"
-    exit
-fi
-if systemctl is-active --quiet mysql; then
-    echo "Mysql Đã được cài đặt"
-else
-    echo"Máy chưa cài đặt mariadb vậy nên sẽ chưa thể thiết lập slow log được cho DB vui lòng cài đặt mariadb"
-    exit
-fi
 
-echo "Máy chủ đạt yêu cầu để thiết lập slow log cho mariadb"
-echo "Tạo file lưu trữ slow log và phân quyền"
-
-touch /var/log/mariadb-slow.log
-chown mysql:mysql /var/log/mariadb-slow.log
-
-
-systemctl restart mariadb
-systemctl restart mysql
-systemctl restart mysqld
 
 
 

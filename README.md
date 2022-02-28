@@ -76,6 +76,7 @@ vi /etc/nginx/nginx.conf
 * Chuẩn bị 2 máy 1 máy chứa:
   * Elasticsearch, Logstash, Kibana với IP là 192.168.1.11 (tối thiểu 2gb RAM để mô hình chạy ổn định)
   * 1 máy chứa Beats với IP là 192.168.1.12 (chuẩn bị máy đã được cài đặt nginx, mariadb)
+  * Nếu có nhiều máy thì chúng ta lặp lại quá trình trên
 * Việc kiểm soát log là vô cùng quan trọng và để việc đó trở nên dễ dàng hơn thì mô hình ELK là giải pháp cho việc kiểm soát log nhanh chóng và dễ dàng
 
 ## 2.	Tiến hành cài đặt
@@ -115,7 +116,7 @@ ip_filebeat="192.168.1.12" (IP máy cài đặt filebeat)
 * Sau khi đã thiết lập xong các thông số thì sẽ đến bước tiếp theo
 
 ## ***Sau đó ta sẽ tiến hành cài đặt bắt đầu từ máy Elastic Stack (có IP 192.168.1.11) đầu tiên***
-# Ta tiến hành cài đặt như sau:
+### Ta tiến hành cài đặt như sau:
 
 ```bash
 #Truy cập vào thư mục sau theo đường dẫn:
@@ -164,11 +165,11 @@ filebeat modules enable mysql
 
 ## ***Xem log trong kibana*** 
 ```bash
-#Đến đây bạn đã có một ELK (một trung tâm quản lý log), nó đang nhận log từ một server gửi đến bằng Filebeat (nếu muốn server khác gửi đến nữa thì cài Filebeat trên server nguồn và cấu hình như trên)
+Đến đây bạn đã có một ELK (một trung tâm quản lý log), nó đang nhận log từ một server gửi đến bằng Filebeat (nếu muốn server khác gửi đến nữa thì cài Filebeat trên server nguồn và cấu hình như trên)
 
-#Truy cập vào Kibana theo địa chỉ IP của ELK, ví dụ http://192.168.1.11:5601, nhấn vào phần Discover, chọn mục Index Management của Elasticsearch, bạn sẽ thấy các index có tiền tố là filebeat-*, chính là các index lưu dữ liệu log do Filebeat gửi đến Logstash và Logstash để chuyển lưu tại Elasticsearch (nếu có nhiều server gửi đến thì có nhiều index dạng này)
+Truy cập vào Kibana theo địa chỉ IP của ELK, ví dụ http://192.168.1.11:5601, nhấn vào phần Discover, chọn mục Index Management của Elasticsearch, bạn sẽ thấy các index có tiền tố là filebeat-*, chính là các index lưu dữ liệu log do Filebeat gửi đến Logstash và Logstash để chuyển lưu tại Elasticsearch (nếu có nhiều server gửi đến thì có nhiều index dạng này)
 
-#Cuối cùng, bấm vào Discover để xem thông tin về các log. Mặc định đang liệt kê các log 15 phút cuối
+Cuối cùng, bấm vào Discover để xem thông tin về các log. Mặc định đang liệt kê các log 15 phút cuối
 ```
 ## ***Setup mariadb slow log*** 
 ```bash

@@ -164,13 +164,13 @@ filebeat modules enable mysql
 ```
 
 ## ***Xem log trong kibana*** 
-```bash
+
 Đến đây bạn đã có một ELK (một trung tâm quản lý log), nó đang nhận log từ một server gửi đến bằng Filebeat (nếu muốn server khác gửi đến nữa thì cài Filebeat trên server nguồn và cấu hình như trên)
 
 Truy cập vào Kibana theo địa chỉ IP của ELK, ví dụ http://192.168.1.11:5601, nhấn vào phần Discover, chọn mục Index Management của Elasticsearch, bạn sẽ thấy các index có tiền tố là filebeat-*, chính là các index lưu dữ liệu log do Filebeat gửi đến Logstash và Logstash để chuyển lưu tại Elasticsearch (nếu có nhiều server gửi đến thì có nhiều index dạng này)
 
 Cuối cùng, bấm vào Discover để xem thông tin về các log. Mặc định đang liệt kê các log 15 phút cuối
-```
+
 ## ***Setup mariadb slow log*** 
 ```bash
 #Đăng nhập vào file conf của mariadb:

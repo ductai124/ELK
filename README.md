@@ -113,7 +113,6 @@ ip_filebeat="192.168.1.12" (IP máy cài đặt filebeat)
 
 ```
 * ### ***Lưu ý:*** file config trên ở tất cả các máy sẽ phải giống nhau nếu không sẽ dẫn đến việc cài đặt sai
-* Sau khi đã thiết lập xong các thông số thì sẽ đến bước tiếp theo
 
 ## ***Sau đó ta sẽ tiến hành cài đặt bắt đầu từ máy Elastic Stack (có IP 192.168.1.11) đầu tiên***
 ### Ta tiến hành cài đặt như sau:

@@ -21,7 +21,16 @@ echo "Máy chủ đạt yêu cầu để cài đặt ELK"
 
 echo "Update và cài đặt java"
 yum update -y
-yum install java-1.8.0-openjdk-devel -y
+#yum install java-1.8.0-openjdk-devel -y
+
+yum -y install java-11-openjdk java-11-openjdk-devel
+
+cat > /etc/profile.d/java11.sh <<EOF
+export JAVA_HOME=$(dirname $(dirname $(readlink $(readlink $(which javac)))))
+export PATH=\$PATH:\$JAVA_HOME/bin
+EOF
+
+source /etc/profile.d/java11.sh
 
 echo "thêm repo cho elasticsreach"
 echo '[elasticsearch-7.x]
